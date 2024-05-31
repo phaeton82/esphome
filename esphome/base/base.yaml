@@ -6,7 +6,8 @@ esphome:
       then:
         lambda: |-
           id(cpu_speed) = ESP.getCpuFreqMHz();
-
+          
+substitutions:
 #rgb_led  / led
   led_invert: "false"
   led_strobe_on: 50ms   # controls the strobe effect if rgb_led or led is enabled
