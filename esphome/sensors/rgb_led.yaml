@@ -1,7 +1,4 @@
 # https://esphome.io/components/light/neopixelbus.html
-substitutions:
-  led_strobe_on: 50ms
-  led_strobe_off: 100ms
 
 light:
   - platform: neopixelbus
