@@ -20,11 +20,6 @@ captive_portal:
 i2c:
   scan: true
 
-wifi:
-  # Fallback hotspot (captive portal) in case wifi connection fails
-  ap:
-    ssid: "${name}"
-
 button:
   - platform: restart
     name: "Restart"
@@ -138,4 +133,3 @@ wifi:
   # Fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "${name}"
-
