@@ -12,10 +12,6 @@ globals:
     restore_value: no
     initial_value: '0'
 
-esphome:
-  name: "${name}"
-  friendly_name: "${friendly_name}"
-
 logger:
   baud_rate: 0  # disable logging via UART
 
