@@ -1,5 +1,11 @@
-substitutions:
-  version: "3.0.1"
+esphome:
+  name: "${name}"
+  friendly_name: "${friendly_name}"
+  on_boot:
+    - priority: 100
+      then:
+        lambda: |-
+          id(cpu_speed) = ESP.getCpuFreqMHz();
 
 #rgb_led  / led
   led_invert: "false"
