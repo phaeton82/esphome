@@ -1,9 +1,5 @@
 # https://esphome.io/components/sensor/bh1750.html
 
-substitutions:
-  bh1750_update_interval: "5s"
-  illuminance_offset: "0"
-
 number:
   - platform: template
     name: "Illuminance Offset"
