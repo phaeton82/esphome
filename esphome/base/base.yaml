@@ -1,6 +1,17 @@
 substitutions:
   version: "3.0.1"
 
+#rgb_led  / led
+  led_invert: "false"
+  led_strobe_on: 50ms   # controls the strobe effect if rgb_led or led is enabled
+  led_strobe_off: 100ms
+
+globals:
+  - id: cpu_speed
+    type: int
+    restore_value: no
+    initial_value: '0'
+
 esphome:
   name: "${name}"
   friendly_name: "${friendly_name}"
@@ -36,5 +47,103 @@ binary_sensor:
     name: "Status"
 
 sensor:
-  - platform: wifi_signal
-    name: "Wifi Signal"
+  - platform: wifi_signal 
+    name: RSSI
+    id: wifi_signal_db
+    update_interval: 60s
+    entity_category: "diagnostic"
+  - platform: template
+    id: esp_memory
+    icon: mdi:memory
+    name: ESP Free Memory
+    lambda: return heap_caps_get_free_size(MALLOC_CAP_INTERNAL) / 1024;
+    unit_of_measurement: 'kB'
+    state_class: measurement
+    entity_category: "diagnostic"
+    update_interval: 60s
+  - platform: uptime
+    id: uptime_sec
+  - platform: template
+    id: uptime_timestamp
+    name: "Uptime"
+    device_class: timestamp
+    entity_category: diagnostic
+    accuracy_decimals: 0
+    update_interval: never
+    lambda: |-
+      static float timestamp = (
+        id(current_time).utcnow().timestamp - id(uptime_sec).state
+      );
+      return timestamp;
+  - platform: template
+    name: "ESP CPU Speed"
+    accuracy_decimals: 0
+    icon: mdi:cpu-32-bit
+    unit_of_measurement: Mhz
+    disabled_by_default: True
+    lambda: |-
+      return (id(cpu_speed));
+    entity_category: "diagnostic"
+    update_interval: 600s
+  - platform: template
+    id: sys_esp_temperature
+    name: ESP Temperature
+    lambda: return temperatureRead();
+    unit_of_measurement: °C
+    device_class: TEMPERATURE
+    update_interval: 45s
+    entity_category: "diagnostic"
+
+time:
+  - platform: homeassistant
+    id: current_time
+    on_time_sync:
+      - component.update: uptime_timestamp
+
+text_sensor:
+  - platform: debug
+    reset_reason:
+      name: "ESP Reset Reason"
+      icon: mdi:anchor
+      disabled_by_default: True
+  - platform: wifi_info
+    ip_address:
+      name: ESP IP Address
+      entity_category: "diagnostic"
+      disabled_by_default: True
+      icon: mdi:ip-network
+    mac_address:
+      name: ESP MAC
+      entity_category: "diagnostic"
+      icon: mdi:ip-network
+      disabled_by_default: True  
+
+switch:
+  - platform: factory_reset
+    name: Factory Reset
+    disabled_by_default: True
+    icon: mdi:heart-broken
+    entity_category: diagnostic
+
+debug:
+  update_interval: 30s
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret esp_api_encryption_key
+
+ota:
+  password: !secret esp_ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  # manual_ip:
+  #   static_ip: 192.168.1.111
+  #   subnet: 255.255.255.0
+  #   gateway: 192.168.1.1
+  # Fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "${name}"
+
