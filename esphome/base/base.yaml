@@ -13,6 +13,9 @@ substitutions:
   led_strobe_on: 50ms   # controls the strobe effect if rgb_led or led is enabled
   led_strobe_off: 100ms
 
+ota:
+  password: !secret esp_ota_password
+  
 globals:
   - id: cpu_speed
     type: int
@@ -126,9 +129,6 @@ debug:
 api:
   encryption:
     key: !secret esp_api_encryption_key
-
-ota:
-  password: !secret esp_ota_password
 
 wifi:
   ssid: !secret wifi_ssid
