@@ -1,12 +1,3 @@
-substitutions:
-  bme_address: "0x76"
-  co2_offset: "0"
-  humidity_offset: "0"
-  iaq_offset: "0"
-  pressure_offset: "0"
-  temperature_offset: "0"
-  voc_offset: "0"
-
 external_components:
   - source: github://schluggi/esphome@dev
     components:
