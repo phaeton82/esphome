@@ -15,8 +15,11 @@ substitutions:
   pir_pin_mode: "INPUT_PULLDOWN"
   
 ota:
-  password: !secret esp_ota_password
-  
+  - password: !secret esp_ota_password
+    num_attempts: 3
+    safe_mode: no
+    platform: esphome
+ 
 globals:
   - id: cpu_speed
     type: int
