@@ -16,8 +16,6 @@ substitutions:
   
 ota:
   - password: !secret esp_ota_password
-    num_attempts: 3
-    safe_mode: no
     platform: esphome
  
 globals:
