@@ -24,3 +24,7 @@ i2c:
 sensor:
   - platform: internal_temperature
     name: "CPU Temperature"
+
+pin: 
+  number: GPIO11
+  mode: INPUT_PULLDOWN
