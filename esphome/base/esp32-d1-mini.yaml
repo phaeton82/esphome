@@ -18,4 +18,4 @@ i2c:
 
 sensor:
   - platform: internal_temperature
-    name: "CPU Temperature"
+    name: "CPU Temperatuur"
