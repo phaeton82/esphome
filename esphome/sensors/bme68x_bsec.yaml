@@ -14,23 +14,23 @@ esphome:
 sensor:
   - platform: bme68x_bsec
     temperature:
-      name: "Temperature"
+      name: "Temperatuur"
       filters:
         - offset: ${temperature_offset}
         - lambda: "return x + id(temperature_offset_ui).state;"
     pressure:
-      name: "Pressure"
+      name: "Luchtdruk"
       device_class: atmospheric_pressure
       filters:
         - offset: ${pressure_offset}
         - lambda: "return x + id(pressure_offset_ui).state;"
     humidity:
-      name: "Humidity"
+      name: "Luchtvochtigheid"
       filters:
         - offset: ${humidity_offset}
         - lambda: "return x + id(humidity_offset_ui).state;"
     iaq:
-      name: "IAQ"
+      name: "Luchtkwaliteit"
       id: iaq
       device_class: aqi
       filters:
@@ -51,7 +51,7 @@ sensor:
 
 number:
   - platform: template
-    name: "Temperature Offset"
+    name: "Temperatuur Offset"
     id: temperature_offset_ui
     unit_of_measurement: "°C"
     min_value: -10
@@ -66,7 +66,7 @@ number:
     entity_category: config
 
   - platform: template
-    name: "Humidity Offset"
+    name: "Luchtvochtigheid Offset"
     id: humidity_offset_ui
     unit_of_measurement: "%"
     min_value: -50
@@ -81,7 +81,7 @@ number:
     entity_category: config
 
   - platform: template
-    name: "Pressure Offset"
+    name: "Luchtdruk Offset"
     id: pressure_offset_ui
     unit_of_measurement: "hPa"
     min_value: -500
@@ -126,7 +126,7 @@ number:
     entity_category: config
 
   - platform: template
-    name: "IAQ Offset"
+    name: "Luchtkwaliteit Offset"
     id: iaq_offset_ui
     unit_of_measurement: "IAQ"
     min_value: -400
@@ -142,7 +142,7 @@ number:
 
 text_sensor:
   - platform: template
-    name: "IAQ Classification"
+    name: "Luchtkwaliteit Classification"
     icon: "mdi:checkbox-marked-circle-outline"
     lambda: |-
       if ( int(id(iaq).state) <= 50) {
