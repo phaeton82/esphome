@@ -33,11 +33,11 @@ i2c:
 
 button:
   - platform: restart
-    name: "Restart"
+    name: "Opnieuw opstarten"
     entity_category: diagnostic
 
   - platform: safe_mode
-    name: "Restart (Safe Mode)"
+    name: "Herstart (Veilige Mode)"
     entity_category: diagnostic
 
 binary_sensor:
@@ -53,7 +53,7 @@ sensor:
   - platform: template
     id: esp_memory
     icon: mdi:memory
-    name: ESP Free Memory
+    name: ESP Vrij geheugen
     lambda: return heap_caps_get_free_size(MALLOC_CAP_INTERNAL) / 1024;
     unit_of_measurement: 'kB'
     state_class: measurement
@@ -74,7 +74,7 @@ sensor:
       );
       return timestamp;
   - platform: template
-    name: "ESP CPU Speed"
+    name: "ESP CPU Snelheid"
     accuracy_decimals: 0
     icon: mdi:cpu-32-bit
     unit_of_measurement: Mhz
@@ -85,7 +85,7 @@ sensor:
     update_interval: 600s
   - platform: template
     id: sys_esp_temperature
-    name: ESP Temperature
+    name: ESP Temperatuur
     lambda: return temperatureRead();
     unit_of_measurement: °C
     device_class: TEMPERATURE
@@ -101,24 +101,24 @@ time:
 text_sensor:
   - platform: debug
     reset_reason:
-      name: "ESP Reset Reason"
+      name: "ESP Reset Reden"
       icon: mdi:anchor
       disabled_by_default: True
   - platform: wifi_info
     ip_address:
-      name: ESP IP Address
+      name: ESP IP Adres
       entity_category: "diagnostic"
       disabled_by_default: True
       icon: mdi:ip-network
     mac_address:
-      name: ESP MAC
+      name: ESP MAC Adres
       entity_category: "diagnostic"
       icon: mdi:ip-network
       disabled_by_default: True  
 
 switch:
   - platform: factory_reset
-    name: Factory Reset
+    name: Reset naar fabrieksinstellingen
     disabled_by_default: True
     icon: mdi:heart-broken
     entity_category: diagnostic
