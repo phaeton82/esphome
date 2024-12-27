@@ -1,6 +1,6 @@
 binary_sensor:
   - platform: template
-    name: "Occupancy"
+    name: "Aanwezigheid"
     id: occupancy
     device_class: occupancy
     lambda: |-
