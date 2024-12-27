@@ -2,7 +2,7 @@
 
 number:
   - platform: template
-    name: "Temperature Offset"
+    name: "Temperatuur Offset"
     id: temperature_offset_ui
     unit_of_measurement: "°C"
     min_value: -10
@@ -19,7 +19,7 @@ number:
       - lambda: 'id(bme280_sensor).update();'
 
   - platform: template
-    name: "Humidity Offset"
+    name: "Luchtvochtigheid Offset"
     id: humidity_offset_ui
     unit_of_measurement: "%"
     min_value: -50
@@ -36,7 +36,7 @@ number:
       - lambda: 'id(bme280_sensor).update();'
 
   - platform: template
-    name: "Pressure Offset"
+    name: "Lichtdruk Offset"
     id: pressure_offset_ui
     unit_of_measurement: "hPa"
     min_value: -500
@@ -58,17 +58,17 @@ sensor:
     address: "${bme_address}"
     update_interval: "${bme_update_interval}"
     temperature:
-      name: "Temperature"
+      name: "Temperatuur"
       filters:
         - offset: ${temperature_offset}
         - lambda: "return x + id(temperature_offset_ui).state;"
     humidity:
-      name: "Humidity"
+      name: "Luchtvochtigheid"
       filters:
         - offset: ${humidity_offset}
         - lambda: "return x + id(humidity_offset_ui).state;"
     pressure:
-      name: "Pressure"
+      name: "Luchtdruk"
       filters:
         - offset: ${pressure_offset}
         - lambda: "return x + id(pressure_offset_ui).state;"
