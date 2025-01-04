@@ -133,8 +133,8 @@ api:
     key: !secret esp_api_encryption_key
 
 wifi:
-  ssid: !secret wifi_iot_ssid
-  password: !secret wifi_iot_password
+  ssid: !secret wifi_not_ssid
+  password: !secret wifi_not_password
   # manual_ip:
   #   static_ip: 192.168.1.111
   #   subnet: 255.255.255.0
